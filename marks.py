@@ -1,12 +1,10 @@
-s1 = int(input("Enter marks of subject 1: "))
-s2 = int(input("Enter marks of subject 2: "))
-s3 = int(input("Enter marks of subject 3: "))
-
+s1 = int(input("Subject 1 marks: "))
+s2 = int(input("Subject 2 marks: "))
+s3 = int(input("Subject 3 marks: "))
 total = s1 + s2 + s3
+print("Total marks:", total)
 percentage = (total / 300) * 100
-
-print("Total marks: ", total)
-print("Percentage: ", percentage)
+print("Percentage:", percentage, "%")
 if percentage >= 90:
     print("Grade: A")
 elif percentage >= 80:
@@ -15,5 +13,5 @@ elif percentage >= 70:
     print("Grade: C")
 elif percentage >= 60:
     print("Grade: D")
-else:    
+else:
     print("Grade: F")
