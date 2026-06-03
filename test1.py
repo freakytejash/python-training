@@ -1,0 +1,1 @@
+# Flask route that shows all students with their makrs and roll number. (use list of dictionary to store data)
