@@ -1,29 +1,38 @@
+LAYOUT :
+container - Centered content with margins
+row - Horizontal row
+col-md-4 - Column that takes up 4/12 of the row on medium screens (3 per row)
+col-md-6 - Column that takes up 6/12 of the row on medium screens (2 per row)
 
-{{ variable }}
-{{ student.name}}
-{{ student|length }}
-{{ name|upper}}
-{{ name|lower}}
+NAVBAR :
+navbar - Main container for the navigation bar
+navbar-dark - Light text (for dark bg)
+navbar-brand - Branding/logo
+nav-link- Navigation links
+bg-dark - Dark background
 
-{% for item in list %}
-    {{ item }}
-{% endfor %}
+CARDS :
+card - Card container
+card-body - Card body
+card-title - Card title
 
-{% if condition %}
-    Condition is true
-{% elif other_condition %}
-    Other condition is true
-{% else %}
-    Condition is false
-{% endif %}
+TABLE :
+table  - basic table
+table-striped - alternating row colors
+table-hover - highlight row on hover
+table-dark - dark themed table
 
-# to generate URL
+TEXT:
+text-muted - grey text
+text-center - center aligned text
+fw-bold - bold text
+mt-3/mb-3 - margin top/bottom 3 units
+p-3 - padding 3 units
 
-{{url_for('function_name')}}
 
-{% extends 'base.html' %}
-
-{@block content %}
-
-{% endblock %}
-
+BADGES :
+badge - badge container
+bg-success - success badge
+bg-primary - primary badge
+bg-warning - warning badge
+bg-danger - danger badge
