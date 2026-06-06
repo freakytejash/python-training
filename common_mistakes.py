@@ -1,1 +1,8 @@
-Bootstrap is CSS framework/Library that provides pre-designed styles and components for building responsive and visually appealing web pages. It includes a grid system, typography, buttons, forms, navigation bars, and various UI elements that can be easily customized and integrated into web projects. Bootstrap helps developers create consistent and mobile-friendly designs without having to write extensive CSS from scratch.
+GET - 
+URL http://127.0.0.1:5000/students
+Data in URL - visible
+
+POST - 
+Data hidden in URL
+Form subit
+Used for login, add record, search

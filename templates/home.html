@@ -1,32 +1,136 @@
 {% extends 'base.html' %}
-{% block title %} Home - College Portal {% endblock %}
+{% block title %}Home — College Portal{% endblock %}
+
 {% block content %}
-<div class="d-flex justify-content-center align-items-center" style="height: 200px;">
-    <h1>Welcome to College Portal</h1>
-    <span class="badge bg-info ms-3">Manage Student Information
-        {{students|length}} students
-    </span>
+
+<!-- Hero Section — professional banner -->
+<div class="hero-section p-5 mb-4">
+    <div class="row align-items-center">
+        <div class="col-md-8">
+            <h1 class="display-5 fw-bold mb-2">
+                Welcome to College Portal 🎓
+            </h1>
+            <p class="fs-5 opacity-75 mb-3">
+                Manage student records, marks and results —
+                all in one place.
+            </p>
+            <a href="{{ url_for('students_page') }}"
+               class="btn btn-light btn-lg px-4 me-2">
+                View Students →
+            </a>
+            <a href="{{ url_for('about') }}"
+               class="btn btn-outline-light btn-lg px-4">
+                About
+            </a>
+        </div>
+        <div class="col-md-4 text-center d-none d-md-block">
+            <span style="font-size: 120px;">📚</span>
+        </div>
+    </div>
 </div>
-<div class="row">
-   {%for student in students %}
+
+<!-- Stats Row -->
+<div class="row mb-4">
+
     <div class="col-md-4 mb-3">
-        <div class ="card">
+        <div class="card stat-card p-3 bg-primary bg-opacity-10">
+            <div class="d-flex align-items-center">
+                <span style="font-size:40px;">👨‍🎓</span>
+                <div class="ms-3">
+                    <h2 class="fw-bold text-primary mb-0">
+                        {{ students|length }}
+                    </h2>
+                    <p class="text-muted mb-0">Total Students</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+        <div class="card stat-card p-3 bg-success bg-opacity-10">
+            <div class="d-flex align-items-center">
+                <span style="font-size:40px;">✅</span>
+                <div class="ms-3">
+                    {% set passed = students|selectattr('marks','ge',60)|list %}
+                    <h2 class="fw-bold text-success mb-0">
+                        {{ passed|length }}
+                    </h2>
+                    <p class="text-muted mb-0">Passed</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+        <div class="card stat-card p-3 bg-warning bg-opacity-10">
+            <div class="d-flex align-items-center">
+                <span style="font-size:40px;">⭐</span>
+                <div class="ms-3">
+                    {% set excellent = students|selectattr('marks','ge',90)|list %}
+                    <h2 class="fw-bold text-warning mb-0">
+                        {{ excellent|length }}
+                    </h2>
+                    <p class="text-muted mb-0">Excellent</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Section heading -->
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h4 class="fw-bold mb-0">Student Overview</h4>
+    <a href="{{ url_for('students_page') }}"
+       class="btn btn-sm btn-outline-primary">
+        View All →
+    </a>
+</div>
+
+<!-- Student Cards — improved -->
+<div class="row">
+    {% for student in students %}
+    <div class="col-12 col-md-6 col-lg-3 mb-3">
+        <div class="card student-card h-100">
+
+            <!-- Card header with roll number -->
+            <div class="card-header py-2"
+                 style="background-color: #1e3a5f; color:white;">
+                <small class="fw-bold">Roll No: {{ student.roll }}</small>
+            </div>
+
             <div class="card-body">
-                <h5 class="card-title">{{student.name}}</h5>
-                <p class = "card-text">Roll Number: {{student.roll}}</p>
-                <p class = "card-text">Marks: {{student.marks}}</p>
+                <h5 class="card-title fw-bold">{{ student.name }}</h5>
+
+                <!-- Progress bar for marks -->
+                <p class="card-text text-muted small mb-1">
+                    Marks: <strong>{{ student.marks }}/100</strong>
+                </p>
+                <div class="progress mb-3" style="height:8px;">
+                    <div class="progress-bar
+                        {% if student.marks >= 90 %}bg-success
+                        {% elif student.marks >= 75 %}bg-primary
+                        {% elif student.marks >= 60 %}bg-warning
+                        {% else %}bg-danger{% endif %}"
+                        style="width: {{ student.marks }}%">
+                    </div>
+                </div>
+
+                <!-- Badge -->
                 {% if student.marks >= 90 %}
-                    <span class="badge bg-success">Excellent</span>
+                    <span class="badge bg-success">🏆 Excellent</span>
                 {% elif student.marks >= 75 %}
-                    <span class="badge bg-primary">Good</span>
+                    <span class="badge bg-primary">👍 Good</span>
                 {% elif student.marks >= 60 %}
-                    <span class="badge bg-warning text-dark">Average</span>
+                    <span class="badge bg-warning text-dark">📈 Average</span>
                 {% else %}
-                    <span class="badge bg-danger">Needs Improvement</span>
+                    <span class="badge bg-danger">⚠️ Needs Help</span>
                 {% endif %}
             </div>
+
         </div>
     </div>
     {% endfor %}
 </div>
+
 {% endblock %}

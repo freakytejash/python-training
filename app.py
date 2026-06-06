@@ -1,30 +1,46 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, flash
 
 app = Flask(__name__)
+app.secret_key = 'linkkiwi2026'  # Needed for flashing messages
 
-stud = [
-    {"name": "Tanuja", "roll": 1, "marks": 85},
+students = [
+    {"name": "Tanuja",    "roll": 1, "marks": 85},
     {"name": "Pratiksha", "roll": 2, "marks": 78},
-    {"name": "Shlok", "roll": 3, "marks": 92},
-    {"name": "Lucky", "roll": 4, "marks": 65},
+    {"name": "Shlok",     "roll": 3, "marks": 92},
+    {"name": "Lucky",     "roll": 4, "marks": 65},
 ]
 
-# Home page
 @app.route('/')
 def home():
-    return render_template('home.html')
+    return render_template('home.html', students=students)  # ← fixed
 
-# About page
 @app.route('/about')
 def about():
     return render_template('about.html')
 
-# Report page
 @app.route('/students')
-def students():
-    return render_template('students.html', students=stud)
+def students_page():
+    
+    return render_template('students.html', students=students)
 
+@app.route('/add', methods=['GET', 'POST'])
+def add_student():
+    if request.method == "POST":
+        name = request.form['student_name']
+        marks = request.form['marks']
+
+        #Print to terminal
+        print(f"Received new student: {name} with marks: {marks}")
+        # #new student dictionary
+        new_student ={
+            "name": name,
+            "marks": int(marks)
+        }
+        students.append(new_student)
+        #Flash message to user
+        flash(f"Student {name} added successfully!", "success")
+        print(f"Updated students list: {students}")
+    return render_template('add_students.html')
 
 if __name__ == '__main__':
-    print("INSIDE MAIN")
     app.run(debug=True)

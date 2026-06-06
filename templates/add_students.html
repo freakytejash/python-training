@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Add Students — College Portal{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card-header bg-dark text-white">
+<h5>Add New Students</h5>
+        </div>
+<!-- Plain HTML form -->
+ <div class="card-body p-4">
+ <form action="{{url_for('add_student')}}" method="POST">
+    <div class ="mb-3">
+    <label class="form-label">Student Name: <input required name = "student_name" class="form-control" placeholder="Enter Student name" type="text">
+    <div class ="mb-3">
+        <label class="form-label">Marks: <input required name = "marks" min="0" max="100" class="form-control" placeholder="Enter Marks" type="number">
+
+    <div class="d-grid">
+    <button type="submit" class="btn btn-dark"> Add </button>
+ </form>
+ </div>
+    </div>
+</div>
+</div>
+ {% endblock %}

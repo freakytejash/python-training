@@ -28,6 +28,7 @@ text-center - center aligned text
 fw-bold - bold text
 mt-3/mb-3 - margin top/bottom 3 units
 p-3 - padding 3 units
+ms-auto - margin start auto (pushes element to the right)
 
 
 BADGES :
