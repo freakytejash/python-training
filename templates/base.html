@@ -47,38 +47,29 @@
 <body class="bg-light">
 
     <!-- Professional Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark shadow-sm"
+    <nav class="navbar navbar-expand navbar-dark shadow-sm"
          style="background-color: #1e3a5f;">
-        <div class="container">
+        <div class="container justify-content-center">
 
             <!-- Brand / Logo -->
-            <a class="navbar-brand fw-bold fs-4" href="{{ url_for('home') }}">
+            <a class="navbar-brand fw-bold fs-4 me-4" href="{{ url_for('home') }}">
                 🎓 College Portal
             </a>
 
-            <!-- Mobile toggle -->
-            <button class="navbar-toggler" type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <!-- Nav links -->
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <div class="navbar-nav ms-auto">
-                    <a class="nav-link px-3" href="{{ url_for('home') }}">
-                        🏠 Home
-                    </a>
-                    <a class="nav-link px-3" href="{{ url_for('students_page') }}">
-                        👨‍🎓 Students
-                    </a>
-                    <a class="nav-link px-3" href="{{ url_for('about') }}">
-                        ℹ️ About
-                    </a>
-                    <a class="nav-link px-3" href="{{ url_for('add_student') }}">
-                        ➕ Add Student
-                    </a>
-                </div>
+            <!-- Nav links — always visible, centered -->
+            <div class="navbar-nav">
+                <a class="nav-link px-3" href="{{ url_for('home') }}">
+                    🏠 Home
+                </a>
+                <a class="nav-link px-3" href="{{ url_for('students_page') }}">
+                    👨‍🎓 Students
+                </a>
+                <a class="nav-link px-3" href="{{ url_for('about') }}">
+                    ℹ️ About
+                </a>
+                <a class="nav-link px-3" href="{{ url_for('add_student') }}">
+                    ➕ Add Student
+                </a>
             </div>
 
         </div>
