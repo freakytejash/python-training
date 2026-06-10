@@ -3,7 +3,7 @@
 
 {% block content %}
 
-<div class="row" justify-content-center">
+<div class="row" class="justify-content-center">
     <div class="col-md-6">
 
         <!-- Detail card -->
@@ -20,16 +20,16 @@
                     <div class="avatar rounded-circle bg-secondary text-white
                                 d-inline-flex align-items-center justify-content-center"
                          style="width: 80px; height: 80px; font-size: 30px;">
-                        {{ student[0].name[0]|upper }}
+                        {{ student['name'][0]|upper }}
                     </div>
-                    <h3 class="fw-bold">{{ student[0].name }}</h3>
+                    <h3 class="fw-bold">{{ student['name'] }} </h3>
                 </div>
 
                 <!-- Details -->
                  <table class="table table-borderless">
                     <tr>
                         <th class="text-muted fw-bold">Roll Number:</th>
-                        <td>{{ student[0].roll }}</td>
+                        <td>{{ student['roll'] }}</td>
                     </tr>
                     <tr>
                         <td class="text-muted fw-bold">Marks:</td>
@@ -45,7 +45,6 @@
                                 style="width: {{ student['marks'] }}%;">
                             </div>
                         </div>
-                    </td>
                     </tr>   
                     </table>
             </div>

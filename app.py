@@ -51,7 +51,7 @@ def student_detail(id):
         flash("Student not found", "danger")
         return redirect(url_for("students_page"))
     
-    return render_template("detail.html", students=[student])
+    return render_template("detail.html", student=student)
 
 
 @app.route("/add", methods=["GET", "POST"])
