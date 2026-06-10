@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, flash
+from flask import Flask, redirect, render_template, request, flash, url_for
 
 from database import get_db, init_db
 
@@ -18,15 +18,40 @@ def home():
     return render_template("home.html", students=students)  # ← fixed
 
 
-@app.route("/about")
-def about():
-    return render_template("about.html")
-
-
 @app.route("/students")
 def students_page():
-
+    conn = get_db()
+    students = conn.execute('SELECT * FROM students ORDER BY id DESC').fetchall()
+    conn.close()
     return render_template("students.html", students=students)
+
+# DELETE - remove by ID
+@app.route('/delete/<int:id>')
+def delete_student(id):
+    conn = get_db()
+    
+    # First check if it exists
+    student = conn.execute('SELECT * FROM students WHERE id = ?', (id,)).fetchone()
+    if student is None:
+        flash("Student not found", "danger")
+        conn.close()
+        return redirect(url_for('students_page'))
+    conn.execute('DELETE FROM students WHERE id = ?', (id,))
+    conn.commit()
+    conn.close()
+    flash("Student deleted successfully", "success")
+    return redirect(url_for('students_page'))
+
+@app.route("/students/<int:id>")
+def student_detail(id):
+    conn = get_db()
+    student = conn.execute('SELECT * FROM students WHERE id = ?', (id,)).fetchone()
+    conn.close()
+    if student is None:
+        flash("Student not found", "danger")
+        return redirect(url_for("students_page"))
+    
+    return render_template("detail.html", students=[student])
 
 
 @app.route("/add", methods=["GET", "POST"])
@@ -59,6 +84,14 @@ def add_student():
         print(f"Updated students list: {students}")
     return render_template("add_students.html")
 
+
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template("404.html"), 404
 
 if __name__ == "__main__":
     init_db()  # Initialize the database
