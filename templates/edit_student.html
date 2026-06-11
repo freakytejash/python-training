@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% block title %}Edit Student — {{student['name']}}{% endblock %}
+
+{% block content %}
+
+<div class="row" justify-content center">
+<div class="col-md-6">
+
+<div class="card shadow-sm">
+    <div class="card-header py-3" style="background-color: #5f1e3a;">
+        <h5 class="mb-0 text-white">
+            ✏️ Edit Student
+        </h5>
+    </div>
+
+    <div class="card-body p-4">
+        <!--Current values info -->
+        <div class="alert alert-info" py-2 mb-4">
+            <small>
+                <strong>Editing: </strong>
+                {{ student['name'] }}
+                Roll No: {{student['roll']}}-
+                Marks: {{ student['marks'] }}
+            </small>
+        </div>
+
+        <form action="{{url_for('edit_student',id=student['id'])}}"
+              method="POST">
+
+              <div class="mb-3">
+                <label class="form-label fw-bold">Student Name</label>
+              
+              <input required
+                     name="student_name"
+                     class="form-control"
+                     placeholder="Enter Student Name"
+                     type="text"
+                     value="{{ student['name'] }}">
+              </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">Roll No</label>
+                <input required
+                       name="roll"
+                       min="0"
+                       class="form-control"
+                       placeholder="Enter Roll Number"
+                       type="number"
+                       value="{{ student['roll'] }}">
+                </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">Marks</label>
+                <input required
+                       name="marks"
+                       min="0"
+                       class="form-control"
+                       placeholder="Enter Marks"
+                       type="number"
+                       value="{{ student['marks'] }}">
+                </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">Subject</label>
+                <input required
+                       name="subject"
+                       class="form-control"
+                       placeholder="Enter Subject"
+                       type="text"
+                       value="{{ student['subject'] }}">
+                </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">Attendance (%)</label>
+                <input required
+                          name="attendance" 
+                          min="0"
+                          max="100"
+                          class="form-control"
+                          type="number"
+
+            </div>
+
+            <div class="d-grid">
+                <button type="submit" class="btn btn-warning fw-bold">
+                    Save Changes
+                </button>
+                <a href="{{ url_for('students_page') }}"
+                   class="btn btn-outline-secondary mt-2">
+                    Cancel
+                </a>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+</div>
+</div>
+
+{% endblock %}
+

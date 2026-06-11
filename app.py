@@ -1,4 +1,4 @@
-from flask import Flask, redirect, render_template, request, flash, url_for
+from flask import Flask, abort, redirect, render_template, request, flash, url_for
 
 from database import get_db, init_db
 
@@ -15,7 +15,22 @@ students = [
 
 @app.route("/")
 def home():
-    return render_template("home.html", students=students)  # ← fixed
+    conn = get_db()
+    
+    #All students from database
+    students = conn.execute('SELECT * FROM students ORDER BY id DESC').fetchall()
+    
+    #Stats using count
+    total = conn.execute('SELECT COUNT(*) FROM students').fetchone()[0]
+    
+    passed = conn.execute('SELECT COUNT(*) FROM students WHERE marks >= 45').fetchone()[0]
+    
+    excellent = conn.execute('SELECT COUNT(*) FROM students WHERE marks >= 90').fetchone()[0]
+    
+    conn.close()
+    
+    return render_template("home.html", students=students, 
+                           total=total, passed=passed, excellent=excellent)
 
 
 @app.route("/students")
@@ -76,13 +91,42 @@ def add_student():
 
         # Print to terminal
         print(f"Received new student: {name} with marks: {marks}")
-        # #new student dictionary
-        new_student = {"name": name, "marks": int(marks)}
-        students.append(new_student)
+        
         # Flash message to user
         flash(f"Student {name} added successfully!", "success")
         print(f"Updated students list: {students}")
     return render_template("add_students.html")
+
+# EDIT - update by ID
+@app.route('/edit/<int:id>', methods=['GET', 'POST'])
+def edit_student(id):
+    conn = get_db()
+    
+    if request.method == 'POST':
+        name = request.form['student_name']
+        marks = request.form['marks']
+        subject = request.form.get('subject', '')
+        attendance = request.form.get('attendance', 0)
+        
+        if not name:
+            flash('Name cannot be empty', 'danger')
+            return redirect(url_for('edit_student', id=id))
+        
+        conn.execute('''UPDATE students SET name=?, marks=?, subject=?, attendance=? 
+                     WHERE id=?''', (name, int(marks), subject, int(attendance), id))
+        conn.commit()
+        conn.close()
+        flash(f'{name} updated successfully!', 'success')
+        return redirect(url_for('students_page'))
+    
+# GET - fetch exisiting record
+    student = conn.execute('SELECT * FROM students WHERE id = ?', (id,)).fetchone()
+    conn.close()
+    
+    if student is None:
+        abort(404) # trigger 404.html
+        
+    return render_template('edit_student.html', student=student)
 
 
 @app.route("/about")
