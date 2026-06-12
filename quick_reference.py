@@ -37,3 +37,20 @@ bg-success - success badge
 bg-primary - primary badge
 bg-warning - warning badge
 bg-danger - danger badge
+
+
+Step - 1 The 12 column concept
+
+| 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 |
+
+col-md-12 - 12 columns - full width
+|                       12                         |
+
+col-md-6 -
+|          6             |          6              |
+
+col-md-4 -
+|    4         |     4       |     4               |
+
+col -md-3 -
+| 3      | 3        | 3    |   3                   |

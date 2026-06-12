@@ -24,3 +24,30 @@ EDIT --> GET pre-fill --> POST UPDATE --> FLASH --> redirect
 DELETE --> DELETE -->FLASH
 404 --> ABORT(404) --> 404.html
 
+Reply karo — A, B, C, ya D:
+A — Flask + Templates + Bootstrap + Forms +
+Database + CRUD sab working
+
+GROUP A -
+Challenge 1 - Search Feature , Add search bar on Navbar
+Challenge 2 - Sort Feature - Name/ Marks/Attendance/Subject
+
+    
+B — Flask + DB working — CRUD mein kuch pending 
+Step 1 - SELECT working - View students list
+
+
+
+C — Flask + Templates working —
+Database abhi nahi hua 
+
+
+D — Flask bhi properly nahi chal raha
+
+
+
+
+
+HTML -
+div, h1, h2 , p, a , ul, li, table, tr,td, th, form, input, button, select
+
