@@ -7,6 +7,9 @@
 #   SELECT COUNT(*) FROM table_name;  -- Count the number of records in a table
 #   SELECT * FROM table_name LIMIT 5;  -- Retrieve only the first 5 records from a table
 
+from flask import Flask
+
+
 abort(400)  # Bad Request if something is wrong with the request
 abort(401) # Unauthorized if user is not authenticated
 abort(403) # Forbidden if user is authenticated but does not have permission
@@ -45,9 +48,16 @@ Database abhi nahi hua
 D — Flask bhi properly nahi chal raha
 
 
-
-
-
 HTML -
 div, h1, h2 , p, a , ul, li, table, tr,td, th, form, input, button, select
 
+
+User type: "Pratiksha"
+
+URL:localhost:5000/search?q=Pratiksha
+
+Flask receives : request.args.get('q') = "Pratiksha"
+
+SQL: SELECT * FROM students WHERE name LIKE '%Pratiksha%'
+
+Result: List of students whose names contain "Pratiksha"

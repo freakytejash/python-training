@@ -12,6 +12,7 @@ def get_db():
 
 def init_db():
     
+    
     """Create table"""""
     conn = get_db()
     # Create students table if it doesn't exist

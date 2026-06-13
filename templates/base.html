@@ -11,6 +11,9 @@
 
     <!-- Custom brand color — ek line se poori site ka color change -->
     <style>
+        .navbar {
+            min-height: 60px;
+        }
         :root {
             --brand: #1e3a5f;
         }
@@ -25,6 +28,10 @@
             background: linear-gradient(135deg, #1e3a5f 0%, #2d6a9f 100%);
             color: white;
             border-radius: 12px;
+        }
+        .nav-link {
+            font-size: 0.95rem;
+            font-weight: 500;
         }
         .stat-card {
             border: none;
@@ -52,24 +59,28 @@
         <div class="container justify-content-center">
 
             <!-- Brand / Logo -->
-            <a class="navbar-brand fw-bold fs-4 me-4" href="{{ url_for('home') }}">
+            <a class="navbar-brand fw-bold fs-5 me-3" href="{{ url_for('home') }}">
                 🎓 College Portal
             </a>
 
             <!-- Nav links — always visible, centered -->
             <div class="navbar-nav">
-                <a class="nav-link px-3" href="{{ url_for('home') }}">
+                <a class="nav-link px-2" py-1 href="{{ url_for('home') }}">
                     🏠 Home
                 </a>
-                <a class="nav-link px-3" href="{{ url_for('students_page') }}">
+                <a class="nav-link px-2" py-1 href="{{ url_for('students_page') }}">
                     👨‍🎓 Students
                 </a>
-                <a class="nav-link px-3" href="{{ url_for('about') }}">
+                <a class="nav-link px-2" py-1 href="{{ url_for('about') }}">
                     ℹ️ About
                 </a>
-                <a class="nav-link px-3" href="{{ url_for('add_student') }}">
+                <a class="nav-link px-2" py-1 href="{{ url_for('add_student') }}">
                     ➕ Add Student
                 </a>
+                <form class="d-flex ms-3 mt-3" action="{{ url_for('search') }}" method="GET">
+                    <input class="form-control form-control-sm me-2" style="width:130px; height:35px" type="search" placeholder="Search" name="q">
+                    <button class="btn btn-outline-light btn-sm" style="width:100px; height:35px" type="submit">Search</button>
+                </form>
             </div>
 
         </div>

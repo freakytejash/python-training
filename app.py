@@ -33,6 +33,7 @@ def home():
                            total=total, passed=passed, excellent=excellent)
 
 
+
 @app.route("/students")
 def students_page():
     conn = get_db()
@@ -128,6 +129,25 @@ def edit_student(id):
         
     return render_template('edit_student.html', student=student)
 
+@app.route("/search")
+def search():
+    #step 1 - get query from URL
+    q = request.args.get('q','')
+    # request.args - GET parameters
+    # 'q' - Form  - name = 'q'
+    conn = get_db()
+    
+    if q:
+        students = conn.execute('''SELECT * FROM students 
+                                WHERE name LIKE ? 
+                                OR SUBJECT LIKE ?
+                                OR roll LIKE ?''',
+                                (f'%{q}%', f'%{q}%', f'%{q}%')).fetchall()
+        
+    else:
+        students = conn.execute('SELECT * FROM students ORDER BY id DESC').fetchall()
+    conn.close()
+    return render_template("search.html", students=students, query=q)
 
 @app.route("/about")
 def about():
