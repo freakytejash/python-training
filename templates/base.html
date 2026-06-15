@@ -65,17 +65,21 @@
 
             <!-- Nav links — always visible, centered -->
             <div class="navbar-nav">
-                <a class="nav-link px-2" py-1 href="{{ url_for('home') }}">
+                <a class="nav-link px-2 py-1" href="{{ url_for('home') }}">
                     🏠 Home
                 </a>
-                <a class="nav-link px-2" py-1 href="{{ url_for('students_page') }}">
+                <a class="nav-link px-2 py-1" href="{{ url_for('students_page') }}">
                     👨‍🎓 Students
                 </a>
-                <a class="nav-link px-2" py-1 href="{{ url_for('about') }}">
+                <a class="nav-link px-2 py-1" href="{{ url_for('about') }}">
                     ℹ️ About
                 </a>
-                <a class="nav-link px-2" py-1 href="{{ url_for('add_student') }}">
+                <a class="nav-link px-2 py-1" href="{{ url_for('add_student') }}">
                     ➕ Add Student
+                </a>
+
+                <a class ="nav-link px-2 py-1" href="{{ url_for('filter_students') }}">
+                    🔍 Filter
                 </a>
                 <form class="d-flex ms-3 mt-3" action="{{ url_for('search') }}" method="GET">
                     <input class="form-control form-control-sm me-2" style="width:130px; height:35px" type="search" placeholder="Search" name="q">
@@ -86,7 +90,7 @@
         </div>
     </nav>
 
-
+<div class="container mt-4 mb-5">
     {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
         {%for category, message in messages %}
@@ -98,10 +102,9 @@
     {% endif %}
     {% endwith %}
     <!-- Page content — INSIDE container -->
-    <div class="container mt-4 mb-5">
         {% block content %}
         {% endblock %}
-    </div>
+</div>
 
     <!-- Professional Footer -->
     <footer style="background-color: #1e3a5f;" class="text-white text-center py-3 mt-5">

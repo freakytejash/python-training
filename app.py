@@ -149,6 +149,40 @@ def search():
     conn.close()
     return render_template("search.html", students=students, query=q)
 
+
+@app.route('/filter')
+def filter_students():
+    #Values from URL
+    subject = request.args.get('subject', '')
+    grade = request.args.get('grade', '')
+
+    conn = get_db()
+    # Unique subjects for dropdown
+    subjects = conn.execute('''SELECT DISTINCT subject FROM students
+                            WHERE subject IS NOT NULL
+                            AND subject != ""
+                            ORDER BY subject ASC''').fetchall()    
+    
+    #Dynamic query- WHERE 1=1
+    query = 'SELECT * FROM students WHERE 1=1'
+    params = []
+    if subject:
+        query += ' AND subject = ?'
+        params.append(subject)
+    if grade =='excellent':
+        query += ' AND marks >= 90'
+    elif grade == 'good':
+        query += ' AND marks >= 75 AND marks < 90'
+    elif grade == 'average':
+        query += ' AND marks >= 60 AND marks < 75'
+    elif grade == 'poor':
+        query += ' AND marks < 45'
+        
+    query += ' ORDER BY id DESC'
+    students = conn.execute(query, params).fetchall()
+    conn.close()
+    return render_template('filter.html', students=students, subjects=subjects, selected_subject=subject, selected_grade=grade)
+
 @app.route("/about")
 def about():
     return render_template("about.html")

@@ -51,7 +51,7 @@ D — Flask bhi properly nahi chal raha
 HTML -
 div, h1, h2 , p, a , ul, li, table, tr,td, th, form, input, button, select
 
-
+Search concepts -
 User type: "Pratiksha"
 
 URL:localhost:5000/search?q=Pratiksha
@@ -61,3 +61,23 @@ Flask receives : request.args.get('q') = "Pratiksha"
 SQL: SELECT * FROM students WHERE name LIKE '%Pratiksha%'
 
 Result: List of students whose names contain "Pratiksha"
+
+Filter concept -
+Step 1 - Problem
+200 students -  sirf computer science ke students ko dekhna hai
+
+Step 2 - How it works?
+User dropdown se "Computer Science" select karta hai
+Form submit hota hai - GET method
+
+URL - localhost:5000/students?subject=Computer+Science
+
+Flask -
+request.args.get('subject') = "Computer Science"
+
+SQL query -
+SELECT * FROM students WHERE subject = 'Computer Science'
+
+Output - List of students enrolled in Computer Science subject
+
+
