@@ -1,0 +1,42 @@
+HTML -> Page Structure (Skeleton)
+CSS (Bootstrap) -> Page design (Clothes)
+JS -> Page behavior (movement, actions)
+
+Example:
+HTML - Button hai
+CSS - button blue, rounded
+JS - button click hone par alert show kare
+
+
+Python                        JavaScript
+Flask -> Backend (Server)     Frontend (Client) (browser)
+terminal -> run python file   <script> browser -> run JS code
+python app.py -> server start  Directly into HTML file or <script> tag in HTML file
+User Clicks then it works       User types then it works
+Page reloads                     Page doesn't reload
+
+#Python
+name = "Durga"
+print(name)  # Output: Durga
+
+if marks > 90:
+    print("Excellent")
+
+def greet(name):
+    print("Hello")
+    
+#JavaScript
+let name = "Durga"
+console.log(name)  // Output: Durga                                
+
+if (marks > 90) {
+    console.log("Excellent")
+}
+
+function greet(name) {
+    console.log("Hello")
+}
+
+# Comment in Python - # This is a comment
+# Comment in JavaScript - // This is a comment
+

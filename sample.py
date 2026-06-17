@@ -52,15 +52,15 @@ HTML -
 div, h1, h2 , p, a , ul, li, table, tr,td, th, form, input, button, select
 
 Search concepts -
-User type: "Pratiksha"
+User type: "Soham"
 
-URL:localhost:5000/search?q=Pratiksha
+URL:localhost:5000/search?q=Soham
 
-Flask receives : request.args.get('q') = "Pratiksha"
+Flask receives : request.args.get('q') = "Soham"
 
-SQL: SELECT * FROM students WHERE name LIKE '%Pratiksha%'
+SQL: SELECT * FROM students WHERE name LIKE '%Soham%'
 
-Result: List of students whose names contain "Pratiksha"
+Result: List of students whose names contain "Soham"
 
 Filter concept -
 Step 1 - Problem

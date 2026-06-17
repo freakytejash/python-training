@@ -163,7 +163,8 @@ def filter_students():
                             AND subject != ""
                             ORDER BY subject ASC''').fetchall()    
     
-    #Dynamic query- WHERE 1=1
+    # Dynamically build query based on filters
+        
     query = 'SELECT * FROM students WHERE 1=1'
     params = []
     if subject:
