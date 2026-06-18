@@ -40,3 +40,12 @@ function greet(name) {
 # Comment in Python - # This is a comment
 # Comment in JavaScript - // This is a comment
 
+js_sample.HTML.     REAL PROJECTS
+Harcoded 5 rows   -> Database (student_page route)
+No Flask          -> Flask + Jinja2 (% for %)
+file:// open      -> localhost:5000 (python app.py)
+<script> SAME.    -> SAME <scrip>
+
+
+
+

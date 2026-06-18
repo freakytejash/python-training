@@ -18,6 +18,15 @@
     </span>
 </div>
 
+<!-- Live Search -->
+<div class="mb-3">
+    <input type="text"
+           id="searchInput"
+           class="form-control form-control-lg"
+           placeholder="🔍 Type to search students by name...">   
+    <div id="resultInfo" class="text-muted small mt-1"></div>
+</div>
+
 <!-- Stats summary bar -->
 
 <div class="row mb-4">
@@ -54,9 +63,9 @@
                         <th class="py-3 text-center">Actions</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="tableBody">
                     {% for student in students %}
-                    <tr class="align-middle">
+                    <tr class="align-middle" data-name="{{ student.name|lower }}">
                         <td class="ps-4 text-muted">
                             {{ loop.index }}
                         </td>
@@ -136,4 +145,25 @@
 
 </div>
 
+<script>
+const searchInput = document.getElementById('searchInput');
+const allRows = document.querySelectorAll('#tableBody tr');
+const resultInfo = document.getElementById('resultInfo');
+
+searchInput.addEventListener('keyup', function() {
+    const query = this.value.toLowerCase();
+    let matchCount = 0;
+    allRows.forEach(function(row) {
+        const name = row.dataset.name || '';
+
+        if(name.includes(query)){
+            row.style.display = '';
+            matchCount++;
+        } else {
+            row.style.display = 'none';
+        }
+    });
+});
+
+</script>
 {% endblock %}

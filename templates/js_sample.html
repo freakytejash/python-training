@@ -26,15 +26,41 @@
                 </thead>
 
                 <tbody id="tableBody">
-                    {% for student in students %}
-                    <tr data-name ="{{ student['name']|lower }}">
+                    <tr data-name ="krishna chavhan">
                         <!-- data-name - JS information  -->
-                        <td>{{ student['name'] }}</td>
-                        <td>{{ student['roll'] }}</td>
-                        <td>{{ student['marks'] }}</td>
-                        <td>{{ student['subject'] }}</td>
+                        <td>Krishna Chavhan</td>
+                        <td>101</td>
+                        <td>95</td>
+                        <td>Java</td>
                     </tr>
-                    {% endfor %}
+                    <tr data-name ="vaishnavi deshmukh">
+                        <!-- data-name - JS information  -->
+                        <td>Vaishnavi Deshmukh</td>
+                        <td>102</td>
+                        <td>90</td>
+                        <td>Python</td>
+                    </tr>
+                    <tr data-name ="tanisha deshmukh">
+                        <!-- data-name - JS information  -->
+                        <td>Tanisha Deshmukh</td>
+                        <td>103</td>
+                        <td>85</td>
+                        <td>Javascript</td>
+                    </tr>
+                    <tr data-name ="srushti rakhonde">
+                        <!-- data-name - JS information  -->
+                        <td>Srushti Rakhonde</td>
+                        <td>104</td>
+                        <td>88</td>
+                        <td>C++</td>
+                    </tr>
+                    <tr data-name ="soham pande">
+                        <!-- data-name - JS information  -->
+                        <td>Soham Pande</td>
+                        <td>105</td>
+                        <td>92</td>
+                        <td>DBMS</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -42,7 +68,18 @@
             const searchInput = document.getElementById('searchInput');
             const allRows = document.querySelectorAll('#tableBody tr');
             
-            
-        </script>
+            searchInput.addEventListener('keyup', function() {
+                const query = this.value.toLowerCase();
+                allRows.forEach(function(row) {
+                    const name = row.dataset.name;
+
+                    if(name.includes(query)){
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            });      
+        </script>   
     </body>
 </html>
