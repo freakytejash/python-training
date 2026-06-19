@@ -12,7 +12,6 @@ students = [
     {"name": "Lucky", "roll": 4, "marks": 65},
 ]
 
-
 @app.route("/")
 def home():
     conn = get_db()
