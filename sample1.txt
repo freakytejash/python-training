@@ -1,0 +1,32 @@
+@app.route('/')
+def home():
+    student_name = "Rahul"
+    return render_template('home.html', name=student_name)
+
+Python Side                     HTML side
+student_name = "Rahul"
+render_template('home.html'. --> {{name}}
+, name=student_name)            (Yeh "Rahul" dikhega)
+
+Step 1 : User register page and Type "Mohini"
+Step 2 - COntinue button click
+Step 3 : Sned request on browser
+Step 4 - register() function works:
+            name =request.form['name] ---> name = "Mohini"
+Step 5: session ['name'] = name 
+Step 6 : redirect (url_for('home')) - tell broser to go to Home page
+Step 7: Browser sends new request to home page
+Step 8 - home() function name = session.get('name') - "Mohini"
+Step 9: render_template('home.html, name = name)
+Step 10: home.html mein {{name}} 
+
+# Hashing 
+'mango123' - Store password Hashing 
+
+
+
+
+
+
+
+    
