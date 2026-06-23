@@ -1,4 +1,4 @@
-from flask import Flask, abort, redirect, render_template, request, flash, url_for
+from flask import Flask, abort, redirect, render_template, request, flash, session, url_for
 from database import get_db, init_db
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -210,7 +210,30 @@ def register():
     
     return render_template("register.html")
 
-@app.errorhandler(404)
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username'].strip()
+        password = request.form['password']
+        
+        conn = get_db()
+        user = conn.execute('SELECT * FROM users WHERE username = ?', (username,)).fetchone()
+        conn.close()
+        
+        if user and check_password_hash(user['password'], password):
+            session['username'] = username
+            flash(f'Welcome {username}!', 'success')
+            return redirect(url_for('home'))
+        else:
+            flash('Invalid username or password', 'danger')
+    return render_template('login.html')
+
+@app.route('/logout')
+def logout():
+    session.pop('username', None)
+    flash('You have been logged out.', 'info')
+    return redirect(url_for('home'))
+       
 def page_not_found(e):
     return render_template("404.html"), 404
 

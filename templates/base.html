@@ -85,8 +85,17 @@
                     <input class="form-control form-control-sm me-2" style="width:130px; height:35px" type="search" placeholder="Search" name="q">
                     <button class="btn btn-outline-light btn-sm" style="width:100px; height:35px" type="submit">Search</button>
                 </form>
+                {% if session.username %}
+                    <span class="nav-link px-2 py-1 text-white">👤 {{ session.username }}</span>
+                    <a class="nav-link px-2 py-1" href="{{ url_for('logout') }}">
+                        🔓 Logout
+                    </a>
+                {% else %}
+                    <a class="nav-link px-2 py-1" href="{{ url_for('login') }}">
+                        🔒 Login
+                    </a>
+                {% endif %}
             </div>
-
         </div>
     </nav>
 
