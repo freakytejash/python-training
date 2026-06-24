@@ -43,6 +43,9 @@ def students_page():
 # DELETE - remove by ID
 @app.route('/delete/<int:id>')
 def delete_student(id):
+    if 'username' not in session:
+        flash("Please login first", "warning")
+        return redirect(url_for('login'))
     conn = get_db()
     
     # First check if it exists
@@ -71,6 +74,10 @@ def student_detail(id):
 
 @app.route("/add", methods=["GET", "POST"])
 def add_student():
+    if 'username' not in session:
+        flash("Please login first", "warning")
+        return redirect(url_for('login'))
+    
     if request.method == "POST":
         name = request.form["student_name"]
         marks = request.form["marks"]
@@ -100,6 +107,10 @@ def add_student():
 # EDIT - update by ID
 @app.route('/edit/<int:id>', methods=['GET', 'POST'])
 def edit_student(id):
+    if 'username' not in session:
+        flash("Please login first", "warning")
+        return redirect(url_for('login'))
+    
     conn = get_db()
     
     if request.method == 'POST':
@@ -131,6 +142,7 @@ def edit_student(id):
 @app.route("/search")
 def search():
     #step 1 - get query from URL
+    
     q = request.args.get('q','')
     # request.args - GET parameters
     # 'q' - Form  - name = 'q'
