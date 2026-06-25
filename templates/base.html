@@ -74,10 +74,11 @@
                 <a class="nav-link px-2 py-1" href="{{ url_for('about') }}">
                     ℹ️ About
                 </a>
+                {% if session.role == 'admin' %}
                 <a class="nav-link px-2 py-1" href="{{ url_for('add_student') }}">
                     ➕ Add Student
                 </a>
-
+                {% endif %}
                 <a class ="nav-link px-2 py-1" href="{{ url_for('filter_students') }}">
                     🔍 Filter
                 </a>

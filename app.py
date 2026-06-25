@@ -43,9 +43,10 @@ def students_page():
 # DELETE - remove by ID
 @app.route('/delete/<int:id>')
 def delete_student(id):
-    if 'username' not in session:
-        flash("Please login first", "warning")
-        return redirect(url_for('login'))
+    if session.get('role') != 'admin':
+        flash("Admins only!  You do not have permission", "danger")
+        return redirect(url_for('home'))
+    
     conn = get_db()
     
     # First check if it exists
@@ -74,9 +75,9 @@ def student_detail(id):
 
 @app.route("/add", methods=["GET", "POST"])
 def add_student():
-    if 'username' not in session:
-        flash("Please login first", "warning")
-        return redirect(url_for('login'))
+    if session.get('role') != 'admin':
+        flash("Admins only!  You do not have permission", "danger")
+        return redirect(url_for('home'))
     
     if request.method == "POST":
         name = request.form["student_name"]
@@ -107,9 +108,9 @@ def add_student():
 # EDIT - update by ID
 @app.route('/edit/<int:id>', methods=['GET', 'POST'])
 def edit_student(id):
-    if 'username' not in session:
-        flash("Please login first", "warning")
-        return redirect(url_for('login'))
+    if session.get('role') != 'admin':
+        flash("Admins only!  You do not have permission", "danger")
+        return redirect(url_for('home'))
     
     conn = get_db()
     
@@ -214,7 +215,7 @@ def register():
             return render_template('register.html')
         
         hashed = generate_password_hash(password)
-        conn.execute('INSERT INTO users (username, password) VALUES (?, ?)', (username,hashed))
+        conn.execute('INSERT INTO users (username, password, role) VALUES (?, ?, ?)', (username, hashed, 'student'))
         conn.commit()
         conn.close()
         flash('Registration successful! Please login.', 'success')
@@ -234,6 +235,7 @@ def login():
         
         if user and check_password_hash(user['password'], password):
             session['username'] = username
+            session['role'] = user['role']
             flash(f'Welcome {username}!', 'success')
             return redirect(url_for('home'))
         else:
@@ -242,7 +244,9 @@ def login():
 
 @app.route('/logout')
 def logout():
+    
     session.pop('username', None)
+    session.pop('role', None)
     flash('You have been logged out.', 'info')
     return redirect(url_for('home'))
        

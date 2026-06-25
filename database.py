@@ -35,6 +35,13 @@ def init_db():
                     password TEXT NOT NULL
                  )
                     ''')
+    
+    try:
+       conn.execute("ALTER TABLE users ADD COLUMN role TEXT DEFAULT 'student'")
+    except Exception:
+        # Column already exists
+        pass
+     
     conn.commit()
     conn.close()
     
