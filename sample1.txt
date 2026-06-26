@@ -27,6 +27,27 @@ if 'username' not in session:
     flash('Please login first!', 'warning')
     return redirect(url_for('login'))
 
+Database Relationship - Join
+Student Excel Sheet 1
+Name - Stream
+Shivam - 1
+Pallavi - 3
+Dhaneshree - 4
+Kaveri - 1
+Pratiksha - 2
+
+Excel Sheet 2 -
+1 - Computer Eng
+2 - Information Technology
+3 - Mechanical Engineering
+4 - Electrical Engineering
+
+
+Role - Full Stack Engineering
+Front end - React js, Angular JS - HTML, JavaScript, Python Flask
+Middleware - Node JS, Python Fast API
+Backend - Database - Oracle, SQL, Postgres, Mongo DB
+
 
 
 
