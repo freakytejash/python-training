@@ -249,6 +249,19 @@ def logout():
     session.pop('role', None)
     flash('You have been logged out.', 'info')
     return redirect(url_for('home'))
+
+@app.route('/subjects')
+def subjects():
+    conn= get_db()
+    rows = conn.execute('''
+            SELECT subjects.name AS subject_name, COUNT(students.id) AS student_count
+            FROM subjects
+            LEFT JOIN students ON students.subject = subjects.name
+            GROUP BY subjects.name
+            ORDER BY subjects.name
+    ''').fetchall()
+    conn.close()
+    return render_template('subjects.html', rows=rows)
        
 def page_not_found(e):
     return render_template("404.html"), 404

@@ -34,14 +34,29 @@ def init_db():
                     username TEXT NOT NULL UNIQUE,
                     password TEXT NOT NULL
                  )
-                    ''')
-    
+                    ''')    
     try:
        conn.execute("ALTER TABLE users ADD COLUMN role TEXT DEFAULT 'student'")
     except Exception:
         # Column already exists
         pass
      
+    conn.execute('''
+                  CREATE TABLE IF NOT EXISTS subjects (
+                     id INTEGER PRIMARY KEY AUTOINCREMENT,
+                     name TEXT NOT NULL UNIQUE
+                     )
+                     '''
+                  )
+    default_subjects = ['Java', 'C++', 'Python', 'Operating Systems', 'Data Structures', 'Database Management Systems', 'Computer Networks']
+
+    for subject in default_subjects:
+         try:
+               conn.execute("INSERT INTO subjects (name) VALUES (?)", (subject,))
+         except sqlite3.IntegrityError:
+               # Subject already exists, ignore the error
+               pass
+                 
     conn.commit()
     conn.close()
     
