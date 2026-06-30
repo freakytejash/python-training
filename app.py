@@ -266,7 +266,7 @@ def subjects():
 def page_not_found(e):
     return render_template("404.html"), 404
 
+init_db()  # Initialize the database
 if __name__ == "__main__":
-    init_db()  # Initialize the database
     app.run(debug=True)
     
