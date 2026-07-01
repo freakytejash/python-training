@@ -53,11 +53,29 @@ pip freeze > requirements.txt
 For Deployment -
 https://www.pythonanywhere.com/
 
-Commands to use in python any where -
+To remove github repo if required
+cd ..
+rm -rf python-training
+
+git clone https://github.com/freakytejash/python-training.git
+
+Commands to use in python any where bash -
 mkvirtualenv myenv --python=python3.10
 cd python-training
+pip install -r requirements.txt
+
+Set virtual environment on Python Anywhere
+/home/tejashmehta/.virtualenvs/myenv
 
 
+Configuration on WSGI file - 
+import sys
+
+path = '/home/tejashmehta/python-training'
+if path not in sys.path:
+    sys.path.append(path)
+
+from app import app as application
 
 
 
