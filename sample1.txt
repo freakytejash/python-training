@@ -77,6 +77,12 @@ if path not in sys.path:
 
 from app import app as application
 
+To do the changes in your website -
+commit your code then take the pull
+git pull
+
+To check where your database is created on pythonanywhere
+find /home/$(whoami) -name "*.db" 2>/dev/null
 
 
 
