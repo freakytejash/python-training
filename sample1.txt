@@ -48,9 +48,15 @@ Front end - React js, Angular JS - HTML, JavaScript, Python Flask
 Middleware - Node JS, Python Fast API
 Backend - Database - Oracle, SQL, Postgres, Mongo DB
 
-pip freeze > requirements.txt
+
+
+
 
 For Deployment -
+On Local VS code -
+pip freeze > requirements.txt
+
+On Web -
 https://www.pythonanywhere.com/
 
 To remove github repo if required
@@ -76,6 +82,8 @@ if path not in sys.path:
     sys.path.append(path)
 
 from app import app as application
+
+Then Save and back to web tab and reload
 
 To do the changes in your website -
 commit your code then take the pull

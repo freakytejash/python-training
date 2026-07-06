@@ -54,51 +54,81 @@
 <body class="bg-light">
 
     <!-- Professional Navbar -->
-    <nav class="navbar navbar-expand navbar-dark shadow-sm"
+    <nav class="navbar navbar-expand-lg navbar-dark shadow-sm"
          style="background-color: #1e3a5f;">
-        <div class="container justify-content-center">
+        <div class="container">
 
             <!-- Brand / Logo -->
             <a class="navbar-brand fw-bold fs-5 me-3" href="{{ url_for('home') }}">
                 🎓 College Portal
             </a>
+            <!-- Hamburger menu for mobile -->
+            <button class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#mainNavbar"
+            aria-controls="mainNavbar"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
             <!-- Nav links — always visible, centered -->
-            <div class="navbar-nav">
-                <a class="nav-link px-2 py-1" href="{{ url_for('home') }}">
-                    🏠 Home
-                </a>
-                <a class="nav-link px-2 py-1" href="{{ url_for('students_page') }}">
-                    👨‍🎓 Students
-                </a>
-                <a class="nav-link px-2 py-1" href="{{ url_for('subjects') }}">
-                    📚 Streams
-                </a>
-                <a class="nav-link px-2 py-1" href="{{ url_for('about') }}">
-                    ℹ️ About
-                </a>
-                {% if session.role == 'admin' %}
-                <a class="nav-link px-2 py-1" href="{{ url_for('add_student') }}">
-                    ➕ Add Student
-                </a>
+            <div class="collapse navbar-collapse" id="mainNavbar">
+                <ul class="navbar-nav me-auto align-items-lg-center">
+                    <li class="nav-item">
+                        <a class="nav-link px-2 py-1" href="{{ url_for('home') }}">
+                            🏠 Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-2 py-1" href="{{ url_for('students_page') }}">
+                            👨‍🎓 Students
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-2 py-1" href="{{ url_for('subjects') }}">
+                            📚 Streams
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-2 py-1" href="{{ url_for('about') }}">
+                            ℹ️ About
+                        </a>
+                    </li>
+                    {% if session.role == 'admin' %}
+                    <li class="nav-item">
+                        <a class="nav-link px-2 py-1" href="{{ url_for('add_student') }}">
+                            ➕ Add Student
+                        </a>
+                    </li>
                 {% endif %}
-                <a class ="nav-link px-2 py-1" href="{{ url_for('filter_students') }}">
-                    🔍 Filter
-                </a>
+                <li class="nav-item">
+                    <a class ="nav-link px-2 py-1" href="{{ url_for('filter_students') }}">
+                        🔍 Filter
+                    </a>
+                </li>
+                <li class="nav-item">
                 <form class="d-flex ms-3 mt-3" action="{{ url_for('search') }}" method="GET">
                     <input class="form-control form-control-sm me-2" style="width:130px; height:35px" type="search" placeholder="Search" name="q">
                     <button class="btn btn-outline-light btn-sm" style="width:100px; height:35px" type="submit">Search</button>
                 </form>
+                </li>
                 {% if session.username %}
+                <li class="nav-item">
                     <span class="nav-link px-2 py-1 text-white">👤 {{ session.username }}</span>
                     <a class="nav-link px-2 py-1" href="{{ url_for('logout') }}">
                         🔓 Logout
                     </a>
+                </li>
                 {% else %}
-                    <a class="nav-link px-2 py-1" href="{{ url_for('login') }}">
-                        🔒 Login
-                    </a>
+                    <li class="nav-item">
+                        <a class="nav-link px-2 py-1" href="{{ url_for('login') }}">
+                            🔒 Login
+                        </a>
+                    </li>
                 {% endif %}
+                </ul>
             </div>
         </div>
     </nav>
