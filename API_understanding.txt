@@ -1,0 +1,16 @@
+API - Application programming Interface
+
+Flask app -- Groq AI server
+Student marks is 85 in java - give tips
+
+LLM - Large Language Model
+Open AI - Chatgpt 1.0 
+Anthoropic - Claude
+Google - Gemini
+Deepseek
+Mistral
+Groq
+Qwen
+
+pip install groq
+
