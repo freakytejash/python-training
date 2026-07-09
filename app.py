@@ -1,5 +1,10 @@
+from http import client
+
+from click import prompt
 from flask import Flask, abort, redirect, render_template, request, flash, session, url_for
 from database import get_db, init_db
+from groq import Groq
+import os
 from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
@@ -39,6 +44,31 @@ def students_page():
     students = conn.execute('SELECT * FROM students ORDER BY id DESC').fetchall()
     conn.close()
     return render_template("students.html", students=students)
+
+@app.route("/students/<int:id>/tip")
+def get_ai_tip(id):
+    conn = get_db()
+    student = conn.execute('SELECT * FROM students WHERE id = ?', (id,)).fetchone()
+    conn.close()
+    if student is None:
+        abort(404)  # trigger 404.html
+    prompt = f"""
+    Student name: {student['name']}
+    Subject: {student['subject']}
+    Marks: {student['marks']}/100
+    Attendance: {student['attendance']}%
+    Please provide practical study tips, In simple and encouraging tone. It should not be more than 2 lines.
+    """
+    client = Groq(api_key=os.environ.get("GROQ_API_KEY", "")
+              )
+    response = client.chat.completions.create(
+        model="llama-3.1-8b-instant",
+        messages=[
+            {"role": "user", "content": prompt}
+        ]
+    )
+    tip = response.choices[0].message.content
+    return render_template("detail.html", student=student, tip=tip)
 
 # DELETE - remove by ID
 @app.route('/delete/<int:id>')
