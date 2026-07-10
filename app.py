@@ -62,8 +62,7 @@ def get_ai_tip(id):
     Attendance: {student['attendance']}%
     Please provide practical study tips, In simple and encouraging tone. It should not be more than 2 lines.
     """
-    client = Groq(api_key=os.environ.get("GROQ_API_KEY")
-              )
+    client = Groq(api_key=os.getenv("GROQ_API_KEY"))
     response = client.chat.completions.create(
         model="llama-3.1-8b-instant",
         messages=[
