@@ -2,10 +2,13 @@ from http import client
 
 from click import prompt
 from flask import Flask, abort, redirect, render_template, request, flash, session, url_for
+from flask.cli import load_dotenv
 from database import get_db, init_db
 from groq import Groq
 import os
 from werkzeug.security import generate_password_hash, check_password_hash
+
+load_dotenv()
 
 app = Flask(__name__)
 app.secret_key = "linkkiwi2026"  # Needed for flashing messages
@@ -59,7 +62,7 @@ def get_ai_tip(id):
     Attendance: {student['attendance']}%
     Please provide practical study tips, In simple and encouraging tone. It should not be more than 2 lines.
     """
-    client = Groq(api_key=os.environ.get("GROQ_API_KEY", "")
+    client = Groq(api_key=os.environ.get("GROQ_API_KEY")
               )
     response = client.chat.completions.create(
         model="llama-3.1-8b-instant",
