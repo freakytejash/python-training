@@ -7,12 +7,24 @@ from database import get_db, init_db
 from groq import Groq
 import os
 from werkzeug.security import generate_password_hash, check_password_hash
+import os
+from werkzeug.utils import secure_filename
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 load_dotenv(os.path.join(BASE_DIR, '.env'))  # Load environment variables from .env file
 
 app = Flask(__name__)
 app.secret_key = "linkkiwi2026"  # Needed for flashing messages
+
+UPLOAD_FOLDER = 'static/uploads'
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)  # Create the upload folder if it doesn't exist
+
+def allowed_file(filename):
+    #only allow certain file extensions
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 students = [
     {"name": "Tanuja", "roll": 1, "marks": 85},

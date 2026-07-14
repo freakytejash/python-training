@@ -48,6 +48,8 @@ Front end - React js, Angular JS - HTML, JavaScript, Python Flask
 Middleware - Node JS, Python Fast API
 Backend - Database - Oracle, SQL, Postgres, Mongo DB
 
+Upload image feature -
+Browser (file selected). --> Flask route  --> saves file to static/uploads/folder --saves only the FILENAME to database
 
 
 
