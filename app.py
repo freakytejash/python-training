@@ -16,7 +16,7 @@ load_dotenv(os.path.join(BASE_DIR, '.env'))  # Load environment variables from .
 app = Flask(__name__)
 app.secret_key = "linkkiwi2026"  # Needed for flashing messages
 
-UPLOAD_FOLDER = 'static/uploads'
+UPLOAD_FOLDER = os.path.join(BASE_DIR, 'static', 'uploads')
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
@@ -134,10 +134,18 @@ def add_student():
             flash('Please provide both name and marks', 'danger')
             return render_template("add_students.html")
         
+        #Add: handle photo upload
+        file = request.files.get('photo')
+        filename = 'default.png'  # Default photo
+        if file and file.filename and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        
+        
         conn = get_db()
         conn.execute('''INSERT INTO students
-                     (name,roll,marks,subject,attendance) VALUES(?,?,?,?,?)''',
-                     (name, roll, int(marks), subject, int(attendance))
+                     (name,roll,marks,subject,attendance,photo) VALUES(?,?,?,?,?,?)''',
+                     (name, roll, int(marks), subject, int(attendance), filename)
                      )
         conn.commit()
         conn.close()

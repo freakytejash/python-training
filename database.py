@@ -46,7 +46,13 @@ def init_db():
     except Exception:
         # Column already exists
         pass
-     
+    
+    try:
+       conn.execute("ALTER TABLE students ADD COLUMN photo TEXT DEFAULT 'default.png'")
+    except Exception:
+        # Column already exists
+        pass
+      
     conn.execute('''
                   CREATE TABLE IF NOT EXISTS subjects (
                      id INTEGER PRIMARY KEY AUTOINCREMENT,
