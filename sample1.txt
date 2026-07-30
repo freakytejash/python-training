@@ -52,6 +52,27 @@ Upload image feature -
 Browser (file selected). --> Flask route  --> saves file to static/uploads/folder --saves only the FILENAME to database
 
 
+Pagination - 
+Page 1 -> students 1 to 10
+Page 2 -> students 11 to 20
+Page 3 -> students 21 to 25
+
+LIMIT - ek page pe kitne records dikhaane Hai
+OFFSET - Kitne records skip karke start karna Hai
+
+Page 1 - OFFSET = 0 (Skip 0, show first 10)
+Page 2 - OFFSET = 10 (skip 10, show next 10)
+Page 3 - OFFSET = 20 (skip 20, show remaining)
+
+OFFSET = (page - 1) * per_page
+
+
+SELECT * FROM students ORDER BY id DESC LIMIT 10 OFFSET 0;
+SELECT * FROM students ORDER BY id DESC LIMIT 10 OFFSET 10;
+
+/students - Default , Page 1
+/students?page=2 -> Page 2
+/students?page=3 -> Page 3
 
 
 

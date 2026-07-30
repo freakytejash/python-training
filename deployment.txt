@@ -63,3 +63,13 @@ Golden Rule 3 - Code change workflow
 Laptop - git push
 Live - git pull -> reload
 Always both sides - laptop se push karo , live pe pull karo
+
+Free hosting alternative of Pythonanywhere-
+Render
+Fly.io
+Gogle cloud run
+
+Free AI API alternatives of Groq -
+Google AI studio (Gemini)
+Cerebras AI
+Openrouter AI

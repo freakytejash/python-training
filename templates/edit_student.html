@@ -25,7 +25,7 @@
         </div>
 
         <form action="{{url_for('edit_student',id=student['id'])}}"
-              method="POST">
+              method="POST" enctype="multipart/form-data">
 
               <div class="mb-3">
                 <label class="form-label fw-bold">Student Name</label>
@@ -78,6 +78,17 @@
                           max="100"
                           class="form-control"
                           type="number"
+                          value="{{ student['attendance'] }}">
+                </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">Photo</label>
+                <input
+                       name="photo"
+                       class="form-control"
+                       type="file"
+                       accept="image/*">
+                </div>
 
             </div>
 

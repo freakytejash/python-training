@@ -56,13 +56,19 @@ def home():
 
 @app.route("/students")
 def students_page():
+    page = request.args.get('page', 1, type=int)
+    per_page = 5
+    offset = (page - 1) * per_page
     conn = get_db()
-    students = conn.execute('SELECT * FROM students ORDER BY id DESC').fetchall()
+    students = conn.execute('SELECT * FROM students ORDER BY id DESC LIMIT ? OFFSET ?', (per_page, offset)).fetchall()
+    total = conn.execute('SELECT COUNT(*) FROM students').fetchone()[0]
     conn.close()
-    return render_template("students.html", students=students)
+    total_pages = (total + per_page - 1) // per_page  # Calculate total pages
+    return render_template("students.html", students=students, page=page, total_pages=total_pages)
 
 @app.route("/students/<int:id>/tip")
 def get_ai_tip(id):
+    
     conn = get_db()
     student = conn.execute('SELECT * FROM students WHERE id = ?', (id,)).fetchone()
     conn.close()
@@ -177,8 +183,15 @@ def edit_student(id):
             flash('Name cannot be empty', 'danger')
             return redirect(url_for('edit_student', id=id))
         
-        conn.execute('''UPDATE students SET name=?, marks=?, subject=?, attendance=? 
-                     WHERE id=?''', (name, int(marks), subject, int(attendance), id))
+        #Add: handle photo upload
+        file = request.files.get('photo')
+        filename = 'default.png'  # Default photo
+        if file and file.filename and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        
+        conn.execute('''UPDATE students SET name=?, marks=?, subject=?, attendance=?, photo=? 
+                     WHERE id=?''', (name, int(marks), subject, int(attendance), filename, id))
         conn.commit()
         conn.close()
         flash(f'{name} updated successfully!', 'success')
