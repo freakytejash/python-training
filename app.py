@@ -69,6 +69,7 @@ def students_page():
 @app.route("/students/<int:id>/tip")
 def get_ai_tip(id):
     
+    
     conn = get_db()
     student = conn.execute('SELECT * FROM students WHERE id = ?', (id,)).fetchone()
     conn.close()

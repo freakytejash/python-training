@@ -74,10 +74,17 @@ SELECT * FROM students ORDER BY id DESC LIMIT 10 OFFSET 10;
 /students?page=2 -> Page 2
 /students?page=3 -> Page 3
 
+Testing
+maine test kiya, sab thik hai -- No proof
+A table showing exactly what was tried what was expected, what happened -- Proof
 
 
-
-
+Test ID     Feature/Scenario                        Steps       Expected result             Actual result               Status
+TC01   Adding student with empty name              Please fill in the field       Please fill in the field       Pass
+TC02    Register student with empty username   Click on Login then click on register then keep username empty, then enter any password, then click register                                                                    Pass
+TC03
+TC04
+TC05
 
 
 
