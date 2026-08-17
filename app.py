@@ -86,8 +86,11 @@ def get_ai_tip(id):
     response = client.chat.completions.create(
         model="llama-3.1-8b-instant",
         messages=[
+            {"role": "system", "content": "You are a helpful assistant that provides study tips for students."},
             {"role": "user", "content": prompt}
-        ]
+        ],
+        temperature=0.7, # NEW
+        max_tokens=60  # Limit the response length
     )
     tip = response.choices[0].message.content
     return render_template("detail.html", student=student, tip=tip)

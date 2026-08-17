@@ -81,11 +81,21 @@ A table showing exactly what was tried what was expected, what happened -- Proof
 
 Test ID     Feature/Scenario                        Steps       Expected result             Actual result               Status
 TC01   Adding student with empty name              Please fill in the field       Please fill in the field       Pass
-TC02    Register student with empty username   Click on Login then click on register then keep username empty, then enter any password, then click register                                                                    Pass
+TC02   Register student with empty username   Click on Login then click on register then keep username empty, then enter any password, then click register                                                                    Pass
 TC03
 TC04
 TC05
 
+Python Framework -
+Django
+Front end web technology - HTML5, Javascript, React JS, Next JS, vui JS
+Backend Technology - Java, Dotnet, Node JS
+Database - SQL, MySQL, Postgres, Mongo DB
+Mobile technology - Android - Java, Kotlin, iOS - Objective C, Swift, React Native, Flutter
+Testing - Manual Testing, Automation testing - Selenium, Appium
+Cloud Technology - Microsoft - Azure, Amazon - AWS, Google - GCP
+
+AI technology - Python
 
 
 
